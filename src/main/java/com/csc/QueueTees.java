@@ -80,13 +80,28 @@ public class QueueTees {
     return ((rear - front) + 1);
   }
 
+  void clear() {
+    if (isEmpty()) { // if empty, can't clear
+      System.out.println("Cannot clear -- Queue is empty");
+    } else {
+      for (int i = front; i <= rear; i++) { // loop through elements in the queue, assign null values
+        cuties[i] = null;
+      }
+
+      //reset queue, popping elements
+      front = -1;
+      rear = -1;
+      System.out.println("QUEUE CLEARED");
+    }
+  }
+
   public static void main(String[] args) {
     Puppy puppy = new Puppy();
     Bunny bunny = new Bunny();
     Panda panda = new Panda();
 
     QueueTees queue = new QueueTees();
-
+    /* 
     System.out.println("Queue Size: " + queue.size());
 
     queue.enQueue(puppy);
@@ -102,6 +117,18 @@ public class QueueTees {
     queue.deQueue();
     queue.deQueue();
 
+    queue.display();
+    System.out.println("Queue Size: " + queue.size());
+
+    */
+    queue.enQueue(puppy);
+    queue.enQueue(bunny);
+    queue.enQueue(panda);
+
+    System.out.println("Queue Size: " + queue.size());
+    queue.display();
+
+    queue.clear();
     queue.display();
     System.out.println("Queue Size: " + queue.size());
   }
