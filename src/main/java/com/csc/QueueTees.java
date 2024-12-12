@@ -1,12 +1,14 @@
 package com.csc;
 
-public class QueueTees {
+public class QueueTees<T> {
   int SIZE = 5; //size of the array
-  Cutie cuties[] = new Cutie[SIZE]; //array to contain cutie objects
+  T[] items; //array to contain cutie objects
   int front;
   int rear;
 
+  @SuppressWarnings("unchecked")
   QueueTees() { //initialize an empty queue
+    items = (T[]) new Object[SIZE];
     front = -1;
     rear = -1;
   }
@@ -27,7 +29,7 @@ public class QueueTees {
     }
   }
 
-  void enQueue(Cutie element) {
+  void enQueue(T element) {
     if (isFull()) {
       System.out.println("Cannot add Cutie -- Queue is full");
     }
@@ -36,18 +38,18 @@ public class QueueTees {
         front++;
       }
       rear++;  //increment rear pointer to allow room for the new cutie object
-      cuties[rear] = element; //set the cuties array at the last index to the cutie object
+      items[rear] = element; //set the cuties array at the last index to the cutie object
       System.out.println("Added " + element + " to the queue.");
     }
   }
 
   
-  Cutie deQueue() {
+  T deQueue() {
     if (isEmpty()) {
       System.out.println("Queue is empty");
       return null;
     }
-    Cutie element = cuties[front]; //set the cutie object to the object at the front index
+    T element = items[front]; //set the cutie object to the object at the front index
     if (front >= rear) { // if Q has only one element, delete, then reset the queue 
       front = -1;
       rear = -1;
@@ -67,7 +69,7 @@ public class QueueTees {
       System.out.println("Front Index: " + front);
       System.out.println("Items: ");
       for (int i = front; i <= rear; i++) {
-        System.out.println(cuties[i] + " ");
+        System.out.println(items[i] + " ");
       }
       System.out.println("Rear Index: " + rear);
     }
@@ -85,7 +87,7 @@ public class QueueTees {
       System.out.println("Cannot clear -- Queue is empty");
     } else {
       for (int i = front; i <= rear; i++) { // loop through elements in the queue, assign null values
-        cuties[i] = null;
+        items[i] = null;
       }
 
       //reset queue, popping elements
@@ -100,7 +102,7 @@ public class QueueTees {
     Bunny bunny = new Bunny();
     Panda panda = new Panda();
 
-    QueueTees queue = new QueueTees();
+    QueueTees<Cutie> queue = new QueueTees<>();
     /* 
     System.out.println("Queue Size: " + queue.size());
 
